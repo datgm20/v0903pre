@@ -28,6 +28,33 @@ namespace v0903pre
         {
             label1.Left += vx;
             label1.Top += vy;
+
+            if (label1.Left < 0)
+            {
+                vx = Math.Abs(vx);
+            }
+            if (label1.Top < 0)
+            {
+                vy = Math.Abs(vy);
+            }
+            if (label1.Right > ClientSize.Width)
+            {
+                vx = -Math.Abs(vx);
+            }
+            if (label1.Bottom > ClientSize.Height)
+            {
+                vy = -Math.Abs(vy);
+            }
+
+            Point mp = MousePosition;
+            mp = PointToClient(mp);
+            if (    (mp.X >= label1.Left )
+                &&  (mp.X < label1.Right)
+                &&  (mp.Y >= label1.Top)
+                && (mp.Y < label1.Bottom))
+            {
+                timer1.Enabled = false;
+            }
         }
     }
 }
