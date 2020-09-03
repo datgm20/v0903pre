@@ -15,13 +15,15 @@ namespace v0903pre
         static Random rand = new Random();
         int vx = rand.Next(-20, 21);
         int vy = rand.Next(-20, 21);
+        string kao = "(・皿・)";
+        int score = 100;
 
         public Form1()
         {
             InitializeComponent();
 
             label1.Left = rand.Next(ClientSize.Width - label1.Width);
-            label1.Left = rand.Next(ClientSize.Height - label1.Height);
+            label1.Top = rand.Next(ClientSize.Height - label1.Height);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -54,7 +56,27 @@ namespace v0903pre
                 && (mp.Y < label1.Bottom))
             {
                 timer1.Enabled = false;
+                button1.Visible = true;
             }
+
+            string t = label1.Text;
+            label1.Text = kao;
+            kao = t;
+
+            score--;
+            label2.Text = "Score " + score;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            score = 100;
+            timer1.Enabled = true;
+            button1.Visible = false;
+
+            vx = rand.Next(-20, 21);
+            vy = rand.Next(-20, 21);
+            label1.Left = rand.Next(ClientSize.Width - label1.Width);
+            label1.Top = rand.Next(ClientSize.Height - label1.Height);
         }
     }
 }
